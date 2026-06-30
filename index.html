@@ -34,40 +34,16 @@
   .kpi .label{font-size:11px;text-transform:uppercase;color:var(--gray);letter-spacing:.5px;margin-bottom:8px;}
   .kpi .value{font-size:28px;font-weight:700;color:var(--black);line-height:1;}
   .kpi .sub{font-size:12px;color:var(--gray);margin-top:6px;}
-  .kpi.warn{border-top-color:#999;}
 
-  .alert{
-    background:#fff3f2;border:1px solid var(--red);border-left:5px solid var(--red);
-    border-radius:4px;padding:14px 18px;margin-bottom:26px;font-size:13.5px;line-height:1.5;
-  }
-  .alert b{color:var(--red);}
-
-  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-bottom:18px;}
-  .card{background:var(--white);border-radius:6px;padding:20px;}
+  .card{background:var(--white);border-radius:6px;padding:20px;margin-bottom:18px;}
   .card h2{font-size:15px;margin:0 0 14px;border-left:4px solid var(--red);padding-left:10px;}
-  .card.full{grid-column:1 / -1;}
 
   table{width:100%;border-collapse:collapse;font-size:12.5px;}
   th{background:var(--black);color:var(--white);text-align:left;padding:8px 10px;font-weight:600;}
   td{padding:7px 10px;border-bottom:1px solid #eee;}
   tr:hover td{background:#fafafa;}
-  .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;}
-  .pill.ok{background:#fde8e8;color:var(--red);}
-  .pill.low{background:#eee;color:#666;}
 
   footer{margin-top:30px;font-size:11px;color:var(--gray);text-align:center;}
-  .toggle-row{display:flex;gap:8px;margin-bottom:12px;}
-  .toggle-row button{
-    border:1px solid var(--red);background:var(--white);color:var(--red);font-size:11.5px;
-    padding:5px 12px;border-radius:14px;cursor:pointer;font-family:inherit;
-  }
-  .toggle-row button.active{background:var(--red);color:var(--white);}
-
-  .comment-card{border-left:4px solid var(--red);}
-  .comment-card p{font-size:13px;line-height:1.6;margin:0 0 10px;color:var(--black);}
-  .comment-card p:last-of-type{margin-bottom:0;}
-  .ai-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px;}
-  .ai-note{margin-top:12px;font-size:10.5px;color:var(--gray);font-style:italic;}
 </style>
 </head>
 <body>
@@ -83,40 +59,20 @@
 
   <div class="kpis" id="kpiRow"></div>
 
-
-
-  <div class="grid2">
-    <div class="card">
-      <h2>Tempo médio até a 1ª venda, por ano</h2>
-      <canvas id="chartAno" height="230"></canvas>
-    </div>
-    <div class="card">
-      <h2>Admitidos x já converteram</h2>
-      <canvas id="chartConv" height="230"></canvas>
-    </div>
+  <div class="card">
+    <h2>Tempo médio até a 1ª venda, por ano</h2>
+    <canvas id="chartAno" height="230"></canvas>
   </div>
 
-  <div class="card full comment-card">
-    <h2><span class="ai-dot"></span> Comentário — diferença entre os anos</h2>
-    <p><b>2024 → 2025:</b> o tempo médio até a 1ª venda quase dobrou, de <b>55,6 para 102,6 dias</b> (+84,5%), com taxa de conversão parecida nos dois anos (90% e 80%). Ou seja, não foi uma questão de menos gente vendendo — os que venderam, em 2025, simplesmente demoraram muito mais para isso. O pico foi junho/2025, com média de 173,9 dias naquela turma.</p>
-    <p><b>2025 → 2026:</b> a média recua para <b>47,2 dias</b> (-54%), o melhor número do período — mas com uma ressalva importante: apenas <b>13 dos 49 colaboradores admitidos em 2026 (26,5%) já converteram</b>, contra 80–90% em 2024 e 2025. A maioria dos admitidos ainda sem 1ª venda entrou em fevereiro, maio e junho, período recente demais para conclusão. Como a média de 2026 só reflete quem já vendeu — tipicamente os casos mais rápidos — é esperado que esse número suba conforme o restante da turma converter, então a comparação direta com 2024 e 2025 ainda não é totalmente justa.</p>
-    <p><b>Lendo os três anos juntos:</b> não há uma tendência linear de melhora ou piora — há uma oscilação real entre safras, o que aponta mais para fatores pontuais (perfil de contratação, mudanças de processo de onboarding, sazonalidade comercial) do que para um efeito contínuo de aprendizado da operação. O ponto mais relevante para investigar é o que mudou entre as turmas de 2024 e as de 2025 para explicar esse salto de quase 47 dias.</p>
-    <div class="ai-note">Comentário gerado a partir dos dados estruturados deste painel · pode conter simplificações, recomenda-se validação humana antes de uso em decisões.</div>
-  </div>
-
-  <div class="card full">
+  <div class="card">
     <h2>Evolução mensal (2024–2026)</h2>
-    <div class="toggle-row">
-      <button class="active" data-mode="media">Média de dias</button>
-      <button data-mode="volume">Volume de admissões</button>
-    </div>
     <canvas id="chartMes" height="110"></canvas>
   </div>
 
-  <div class="card full">
+  <div class="card">
     <h2>Detalhe por ano</h2>
     <table>
-      <thead><tr><th>Ano</th><th>Admitidos</th><th>Converteram</th><th>% Convertido</th><th>Média (dias)</th><th>Mediana (dias)</th><th>Mín (dias)</th><th>Máx (dias)</th></tr></thead>
+      <thead><tr><th>Ano</th><th>Vendas registradas</th><th>Média (dias)</th><th>Mediana (dias)</th><th>Mín (dias)</th><th>Máx (dias)</th></tr></thead>
       <tbody id="tabelaAno"></tbody>
     </table>
   </div>
@@ -126,48 +82,48 @@
 
 <script>
 const resumoAno = [
-  {ano:2024, admitidos:10, converteram:9, media:55.6, mediana:31.0, min:10.0, max:161.0, pct:90.0},
-  {ano:2025, admitidos:20, converteram:16, media:102.6, mediana:91.1, min:20.33, max:226.88, pct:80.0},
-  {ano:2026, admitidos:49, converteram:13, media:47.2, mediana:44.0, min:25.88, max:82.12, pct:26.5}
+  {ano:2024, vendas:9, media:55.6, mediana:31.0, min:10.0, max:161.0},
+  {ano:2025, vendas:16, media:102.6, mediana:91.1, min:20.33, max:226.88},
+  {ano:2026, vendas:13, media:47.2, mediana:44.0, min:25.88, max:82.12}
 ];
 
 const resumoMes = [
-  {mes:'2024-05',admitidos:1,converteram:1,media:10.0},
-  {mes:'2024-06',admitidos:2,converteram:2,media:60.5},
-  {mes:'2024-07',admitidos:1,converteram:1,media:96.0},
-  {mes:'2024-08',admitidos:4,converteram:3,media:70.9},
-  {mes:'2024-09',admitidos:1,converteram:1,media:26.0},
-  {mes:'2024-10',admitidos:1,converteram:1,media:35.0},
-  {mes:'2025-01',admitidos:1,converteram:1,media:126.0},
-  {mes:'2025-02',admitidos:2,converteram:2,media:60.6},
-  {mes:'2025-03',admitidos:1,converteram:1,media:28.0},
-  {mes:'2025-04',admitidos:4,converteram:4,media:124.0},
-  {mes:'2025-05',admitidos:3,converteram:2,media:128.0},
-  {mes:'2025-06',admitidos:2,converteram:1,media:173.9},
-  {mes:'2025-07',admitidos:3,converteram:2,media:120.9},
-  {mes:'2025-08',admitidos:1,converteram:1,media:93.1},
-  {mes:'2025-09',admitidos:1,converteram:1,media:20.3},
-  {mes:'2025-11',admitidos:2,converteram:1,media:86.0},
-  {mes:'2026-01',admitidos:7,converteram:3,media:42.7},
-  {mes:'2026-02',admitidos:21,converteram:9,media:51.0},
-  {mes:'2026-03',admitidos:1,converteram:0,media:null},
-  {mes:'2026-05',admitidos:12,converteram:1,media:25.9},
-  {mes:'2026-06',admitidos:8,converteram:0,media:null}
+  {mes:'2024-05', media:10.0},
+  {mes:'2024-06', media:60.5},
+  {mes:'2024-07', media:96.0},
+  {mes:'2024-08', media:70.9},
+  {mes:'2024-09', media:26.0},
+  {mes:'2024-10', media:35.0},
+  {mes:'2025-01', media:126.0},
+  {mes:'2025-02', media:60.6},
+  {mes:'2025-03', media:28.0},
+  {mes:'2025-04', media:124.0},
+  {mes:'2025-05', media:128.0},
+  {mes:'2025-06', media:173.9},
+  {mes:'2025-07', media:120.9},
+  {mes:'2025-08', media:93.1},
+  {mes:'2025-09', media:20.3},
+  {mes:'2025-11', media:86.0},
+  {mes:'2026-01', media:42.7},
+  {mes:'2026-02', media:51.0},
+  {mes:'2026-03', media:null},
+  {mes:'2026-05', media:25.9},
+  {mes:'2026-06', media:null}
 ];
 
-const RED = '#E30000', BLACK = '#0F0F0F', GRAY='#cccccc';
+const RED = '#E30000', BLACK = '#0F0F0F';
 
 // KPIs
 const kpiRow = document.getElementById('kpiRow');
 const kpiDefs = [
-  {label:'Média geral (2024-2026)', value: '72,5 dias', sub:'considerando apenas convertidos'},
-  {label:'2024', value: '55,6 dias', sub:'90% convertidos (9/10)'},
-  {label:'2025', value: '102,6 dias', sub:'80% convertidos (16/20)'},
-  {label:'2026 (parcial)', value: '47,2 dias', sub:'apenas 26,5% convertidos (13/49)'},
+  {label:'Média geral (2024-2026)', value: '72,5 dias', sub:'considerando vendas já registradas'},
+  {label:'2024', value: '55,6 dias', sub:'9 vendas registradas'},
+  {label:'2025', value: '102,6 dias', sub:'16 vendas registradas'},
+  {label:'2026', value: '47,2 dias', sub:'13 vendas registradas até o momento'},
 ];
 kpiDefs.forEach((k,i)=>{
   const div = document.createElement('div');
-  div.className = 'kpi'+(i===3?' warn':'');
+  div.className = 'kpi';
   div.innerHTML = `<div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div>`;
   kpiRow.appendChild(div);
 });
@@ -176,8 +132,7 @@ kpiDefs.forEach((k,i)=>{
 const tbody = document.getElementById('tabelaAno');
 resumoAno.forEach(r=>{
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td><b>${r.ano}</b></td><td>${r.admitidos}</td><td>${r.converteram}</td>
-    <td><span class="pill ${r.pct>=70?'ok':'low'}">${r.pct.toFixed(1)}%</span></td>
+  tr.innerHTML = `<td><b>${r.ano}</b></td><td>${r.vendas}</td>
     <td>${r.media.toFixed(1)}</td><td>${r.mediana.toFixed(1)}</td><td>${r.min.toFixed(1)}</td><td>${r.max.toFixed(1)}</td>`;
   tbody.appendChild(tr);
 });
@@ -204,34 +159,8 @@ new Chart(document.getElementById('chartAno'), {
   }
 });
 
-// Chart 2: conversão
-new Chart(document.getElementById('chartConv'), {
-  type:'bar',
-  data:{
-    labels: resumoAno.map(r=>r.ano),
-    datasets:[
-      {label:'Converteram', data: resumoAno.map(r=>r.converteram), backgroundColor: RED, stack:'s', borderRadius:4},
-      {label:'Sem 1ª venda ainda', data: resumoAno.map(r=>r.admitidos-r.converteram), backgroundColor: GRAY, stack:'s', borderRadius:4}
-    ]
-  },
-  plugins:[ChartDataLabels],
-  options:{
-    layout:{padding:{top:6}},
-    plugins:{
-      legend:{position:'bottom', labels:{boxWidth:12,font:{size:11}}},
-      datalabels:{
-        color:(ctx)=> ctx.dataset.backgroundColor===RED ? '#fff' : BLACK,
-        font:{size:11, weight:'600'},
-        formatter:v=> v>0 ? v : ''
-      }
-    },
-    scales:{y:{beginAtZero:true, grid:{color:'#eee'}}, x:{grid:{display:false}}}
-  }
-});
-
-// Chart 3: mensal toggle
-const ctxMes = document.getElementById('chartMes');
-let chartMes = new Chart(ctxMes, {
+// Chart 2: mensal
+new Chart(document.getElementById('chartMes'), {
   type:'bar',
   data:{
     labels: resumoMes.map(r=>r.mes),
@@ -243,36 +172,12 @@ let chartMes = new Chart(ctxMes, {
     plugins:{
       legend:{display:false},
       datalabels:{
-        anchor:'end',
-        align:'top',
-        offset:2,
-        color: BLACK,
-        font:{size:10, weight:'600'},
-        formatter:(value, ctx)=>{
-          const mode = ctx.chart.$mode || 'media';
-          if(value===null || value===undefined) return '';
-          return mode==='media' ? value.toFixed(1) : value;
-        }
+        anchor:'end', align:'top', offset:2, color: BLACK, font:{size:10, weight:'600'},
+        formatter:(value)=> value===null || value===undefined ? '' : value.toFixed(1)
       }
     },
     scales:{y:{beginAtZero:true, grid:{color:'#eee'}}, x:{grid:{display:false}, ticks:{maxRotation:60,minRotation:60,font:{size:10}}}}
   }
-});
-chartMes.$mode = 'media';
-
-document.querySelectorAll('.toggle-row button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.toggle-row button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const mode = btn.dataset.mode;
-    chartMes.$mode = mode;
-    if(mode==='media'){
-      chartMes.data.datasets[0] = {label:'Média de dias até 1ª venda', data: resumoMes.map(r=>r.media), backgroundColor: RED, borderRadius:3};
-    } else {
-      chartMes.data.datasets[0] = {label:'Colaboradores admitidos', data: resumoMes.map(r=>r.admitidos), backgroundColor: BLACK, borderRadius:3};
-    }
-    chartMes.update();
-  });
 });
 </script>
 </body>

@@ -37,6 +37,8 @@
 
   .card{background:var(--white);border-radius:6px;padding:20px;margin-bottom:18px;}
   .card h2{font-size:15px;margin:0 0 14px;border-left:4px solid var(--red);padding-left:10px;}
+  .chart-box{position:relative;height:300px;}
+  .chart-box.tall{height:320px;}
 
   table{width:100%;border-collapse:collapse;font-size:12.5px;}
   th{background:var(--black);color:var(--white);text-align:left;padding:8px 10px;font-weight:600;}
@@ -61,12 +63,12 @@
 
   <div class="card">
     <h2>Tempo médio até a 1ª venda, por ano</h2>
-    <canvas id="chartAno" height="230"></canvas>
+    <div class="chart-box"><canvas id="chartAno"></canvas></div>
   </div>
 
   <div class="card">
     <h2>Evolução mensal (2024–2026)</h2>
-    <canvas id="chartMes" height="110"></canvas>
+    <div class="chart-box tall"><canvas id="chartMes"></canvas></div>
   </div>
 
   <div class="card">
@@ -146,6 +148,7 @@ new Chart(document.getElementById('chartAno'), {
   },
   plugins:[ChartDataLabels],
   options:{
+    maintainAspectRatio:false,
     layout:{padding:{top:24}},
     plugins:{
       legend:{display:false},
@@ -168,6 +171,7 @@ new Chart(document.getElementById('chartMes'), {
   },
   plugins:[ChartDataLabels],
   options:{
+    maintainAspectRatio:false,
     layout:{padding:{top:22}},
     plugins:{
       legend:{display:false},
